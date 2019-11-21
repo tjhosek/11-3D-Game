@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://Assets/pistol.obj" type="ArrayMesh" id=2]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.5
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.5, 0.1, 0.5 )
+
+[node name="Player" type="KinematicBody"]
+script = ExtResource( 1 )
+
+[node name="Body" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.711162, 0 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="CameraHolder" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.671557, 0 )
+
+[node name="Camera" type="Camera" parent="CameraHolder"]
+
+[node name="Pistol" type="MeshInstance" parent="."]
+transform = Transform( -6.95978, -0.558166, -0.499954, -0.578318, 6.97092, 0.2681, 0.476499, 0.307864, -6.97697, 0.197846, 0.47346, -0.370387 )
+mesh = ExtResource( 2 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
+material/7 = null
+material/8 = null
+material/9 = null
+material/10 = null
+material/11 = null
+material/12 = null
+material/13 = null
