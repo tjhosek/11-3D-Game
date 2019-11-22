@@ -27,8 +27,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.577571, 0 )
 [node name="Camera" type="Camera" parent="Pivot"]
 current = true
 
+[node name="RayCast" type="RayCast" parent="Pivot/Camera"]
+enabled = true
+cast_to = Vector3( 0, 0, -50 )
+
 [node name="Pistol" type="MeshInstance" parent="Pivot"]
-transform = Transform( -7.9673, 0.0527276, -0.720656, 0.136057, 7.94543, -0.922857, 0.709657, -0.931341, -7.91385, 0.248224, -0.206818, -0.463196 )
+transform = Transform( -7.9673, 0.0527276, -0.720656, 0.136057, 7.94543, -0.922857, 0.709657, -0.931341, -7.91385, 0.248224, -0.225813, -0.463196 )
 cast_shadow = 0
 mesh = ExtResource( 2 )
 material/0 = null

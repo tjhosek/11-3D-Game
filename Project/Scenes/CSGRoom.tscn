@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/World.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Ledge.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Wall.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/TestDummy.tscn" type="PackedScene" id=5]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.858824, 0.737255, 0.501961, 1 )
@@ -51,3 +52,6 @@ omni_range = 9.6
 
 [node name="FPS Character" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 2, -5 )
+
+[node name="TestDummy" parent="." instance=ExtResource( 5 )]
+transform = Transform( 2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 4.5, 0.5, 3.5 )
