@@ -1,6 +1,7 @@
 extends KinematicBody
 
 onready var camera = $Pivot/Camera
+onready var raycast = $Pivot/Camera/RayCast
 
 var shoot = false
 signal shootanims
@@ -40,6 +41,14 @@ func _unhandled_input(event):
 		rotate_y(-event.relative.x*mouse_sensitivity)
 		$Pivot.rotate_x(-event.relative.y*mouse_sensitivity)
 		$Pivot.rotation.x = clamp($Pivot.rotation.x, -1.2, 1.2)
+		
+func shoot_ray():
+	if raycast.is_colliding() and shoot:
+		var hit = raycast.get_collider()
+		if hit.is_in_group("Enemies"):
+			hit.queue_free()
+			
+		
 
 func _physics_process(delta):
 	#Applying Gravity
@@ -54,6 +63,7 @@ func _physics_process(delta):
 	#Checking for Jump
 	if jump and is_on_floor():
 		velocity.y = jump_speed
-		
+	
+	shoot_ray()
 	shoot = false
 	

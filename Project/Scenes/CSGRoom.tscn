@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/World.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Ledge.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Wall.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/TestDummy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/crosshair.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/enemySpawner.tscn" type="PackedScene" id=7]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.858824, 0.737255, 0.501961, 1 )
@@ -54,4 +56,13 @@ omni_range = 9.6
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 2, -5 )
 
 [node name="TestDummy" parent="." instance=ExtResource( 5 )]
-transform = Transform( 2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 4.5, 0.5, 3.5 )
+transform = Transform( 2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 6.5, 0.5, 6.5 )
+
+[node name="HUD" type="Node2D" parent="."]
+
+[node name="Crosshair" type="Sprite" parent="HUD"]
+position = Vector2( 512, 300 )
+texture = ExtResource( 6 )
+
+[node name="enemySpawner" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-008, 0, -8.74228e-008, -1, 3.75522, 4.5, 7.03195 )
