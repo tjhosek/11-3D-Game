@@ -4,7 +4,7 @@ onready var camera = $Pivot/Camera
 onready var pistol = $Pivot/Pistol/Fire
 onready var pistolidle = $Pivot/Pistol/Idle
 
-var shoot = false
+export var shoot = false
 
 var gravity = 30
 var jump_speed = 12
@@ -19,8 +19,8 @@ var reco_speed = .1
 var fire_trans = Tween.TRANS_CUBIC
 var pistol_idle_locs = [
 	base_loc,
-	Vector3(-4.758,-172.448,-2.526),
-	Vector3(6.624,-174.797,0.981)
+	Vector3(-3.758,-172.448,-2.526),
+	Vector3(3.624,-174.797,0.981)
 ]
 var idle_spd = 1
 
@@ -28,14 +28,15 @@ var velocity = Vector3()
 var jump = false
 
 func _ready():
-	for i in range(len(pistol_idle_locs)):
-		var prev = Vector3()
-		if i == 0:
-			prev = pistol_idle_locs[len(pistol_idle_locs)-1]
-		else:
-			prev = pistol_idle_locs[i-1]
-		pistolidle.interpolate_property(pistolidle.get_parent(),"rotation_degrees",prev,pistol_idle_locs[i],idle_spd,Tween.TRANS_QUART,Tween.EASE_IN_OUT,i*idle_spd)
-	pistolidle.start()
+#	for i in range(len(pistol_idle_locs)):
+#		var prev = Vector3()
+#		if i == 0:
+#			prev = pistol_idle_locs[len(pistol_idle_locs)-1]
+#		else:
+#			prev = pistol_idle_locs[i-1]
+#		pistolidle.interpolate_property(pistolidle.get_parent(),"rotation_degrees",prev,pistol_idle_locs[i],idle_spd,Tween.TRANS_SINE,Tween.EASE_IN_OUT,i*idle_spd)
+#	pistolidle.start()
+	pass
 
 func get_input():
 	jump = false
