@@ -189,3 +189,5 @@ material/0 = null
 [node name="Floor Detect" type="CollisionShape" parent="." index="7"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 0, 0 )
 shape = SubResource( 13 )
+
+[node name="Flinch" type="Tween" parent="." index="8"]

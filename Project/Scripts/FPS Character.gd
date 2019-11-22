@@ -14,6 +14,8 @@ var mouse_sensitivity = .002 #Radians per Pixel
 var velocity = Vector3()
 var jump = false
 
+var damage = 0
+
 func _ready():
 	connect("shootanims",$Pivot/Pistol,"pistolAnims")
 
@@ -46,8 +48,8 @@ func shoot_ray():
 	if raycast.is_colliding() and shoot:
 		var hit = raycast.get_collider()
 		if hit.is_in_group("Enemies"):
-			hit.queue_free()
-			
+			hit.health -= damage
+			get_parent().get_node("HUD/Label").text = "hit: "+str(raycast.get_collision_point())
 		
 
 func _physics_process(delta):

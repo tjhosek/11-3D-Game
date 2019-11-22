@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/enemySpawner.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/TestDummy.tscn" type="PackedScene" id=2]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.858824, 0.737255, 0.501961, 1 )
@@ -20,9 +19,6 @@ material = SubResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.815434, 0 )
 operation = 2
 material = SubResource( 2 )
-
-[node name="TestDummy" parent="." instance=ExtResource( 2 )]
-transform = Transform( 2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0.5, 0 )
 
 [node name="spawnCheck" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
