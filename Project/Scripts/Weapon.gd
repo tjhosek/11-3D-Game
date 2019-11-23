@@ -1,5 +1,7 @@
 extends MeshInstance
 
+class_name Weapon
+
 signal shoot
 
 export var auto = false
@@ -26,6 +28,14 @@ export var active = false
 var fire_trans = Tween.TRANS_CUBIC
 
 func _ready():
+	#Updating position if active
+	if active:
+		translation = base_location
+		rotation_degrees = base_rotation
+	else:
+		translation = Vector3(0,-.5,0)
+		rotation_degrees =Vector3(0,0,0)
+	
 	#Rotation Sway Anims
 	for i in range(len(idle_locs)):
 		var prev = Vector3()
@@ -38,6 +48,7 @@ func _ready():
 	#positional sway Anims
 	idleTween.interpolate_property(self,"translation",null,translation+idle_anim_offset,idle_translation_speed,Tween.TRANS_QUART,Tween.EASE_IN_OUT)
 	idleTween.interpolate_property(self,"translation",translation+idle_anim_offset,translation,idle_translation_speed,Tween.TRANS_QUART,Tween.EASE_IN_OUT,idle_translation_speed)
+	
 	if active:
 		idleTween.start()
 	
@@ -45,3 +56,6 @@ func fireAnims():
 	fireTween.interpolate_property(self,"rotation_degrees",null,reco_loc,fire_anim_speed,fire_trans,Tween.EASE_OUT)
 	fireTween.interpolate_property(self,"rotation_degrees",reco_loc,base_rotation,recovery_anim_speed,fire_trans,Tween.EASE_OUT,fire_anim_speed)
 	fireTween.start()
+	
+func _physics_process(delta):
+	pass

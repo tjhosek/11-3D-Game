@@ -1,7 +1,9 @@
 extends KinematicBody
 
 onready var camera = $Pivot/Camera
-onready var raycast = $Pivot/Camera/RayCast
+onready var raycast = $Pivot/RayCast
+onready var weapon_container = $Pivot/Weapons
+onready var current_weapon = $Pivot/Weapons/Pistol
 
 var shoot = false
 signal shootanims
@@ -17,7 +19,8 @@ var jump = false
 var damage = 0
 
 func _ready():
-	connect("shootanims",$Pivot/Pistol,"fireAnims")
+	update_weapon()
+	connect("shootanims",current_weapon,"fireAnims")
 
 func get_input():
 	jump = false
@@ -52,6 +55,12 @@ func shoot_ray():
 			get_parent().get_node("HUD/Label").text = "hit: "+str(raycast.get_collision_point())
 			print(str(raycast.get_collision_point()))
 		
+func update_weapon():
+	for i in weapon_container.get_children():
+		if i.active:
+			current_weapon = i
+			print(str(current_weapon.name))
+			connect("shootanims",current_weapon,"fireAnims")
 
 func _physics_process(delta):
 	#Applying Gravity
