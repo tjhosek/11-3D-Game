@@ -17,7 +17,7 @@ var jump = false
 var damage = 0
 
 func _ready():
-	connect("shootanims",$Pivot/Pistol,"pistolAnims")
+	connect("shootanims",$Pivot/Pistol,"fireAnims")
 
 func get_input():
 	jump = false
@@ -50,6 +50,7 @@ func shoot_ray():
 		if hit.is_in_group("Enemies"):
 			hit.health -= damage
 			get_parent().get_node("HUD/Label").text = "hit: "+str(raycast.get_collision_point())
+			print(str(raycast.get_collision_point()))
 		
 
 func _physics_process(delta):

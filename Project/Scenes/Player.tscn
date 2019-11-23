@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/FPS Character.gd" type="Script" id=1]
-[ext_resource path="res://Assets/pistol.obj" type="ArrayMesh" id=2]
-[ext_resource path="res://Scripts/Pistol.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Weapon.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/uzi.obj" type="ArrayMesh" id=3]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
@@ -31,29 +31,30 @@ current = true
 enabled = true
 cast_to = Vector3( 0, 0, -50 )
 
-[node name="Pistol" type="MeshInstance" parent="Pivot"]
-transform = Transform( -7.9673, 0.0527276, -0.720656, 0.136057, 7.94543, -0.922857, 0.709657, -0.931341, -7.91385, 0.248224, -0.225813, -0.463196 )
-cast_shadow = 0
-mesh = ExtResource( 2 )
-material/0 = null
-material/1 = null
-material/2 = null
-material/3 = null
-material/4 = null
-material/5 = null
-material/6 = null
-material/7 = null
-material/8 = null
-material/9 = null
-material/10 = null
-material/11 = null
-material/12 = null
-material/13 = null
-script = ExtResource( 3 )
+[node name="Pistol" parent="Pivot" instance=ExtResource( 2 )]
+transform = Transform( -7.9661, -0.636763, -0.368537, -0.593764, 7.93057, -0.868048, 0.434431, -0.837016, -7.94422, 0.202713, -0.208028, -0.405923 )
+active = true
 
-[node name="Fire" type="Tween" parent="Pivot/Pistol"]
-
-[node name="Idle" type="Tween" parent="Pivot/Pistol"]
-repeat = true
-playback_process_mode = 0
-playback/repeat = true
+[node name="SMG" parent="Pivot" instance=ExtResource( 2 )]
+transform = Transform( 8, 0, 0, 0, 8, 0, 0, 0, 8, 0, -0.5, 0 )
+mesh = ExtResource( 3 )
+material/14 = null
+material/15 = null
+material/16 = null
+material/17 = null
+material/18 = null
+material/19 = null
+material/20 = null
+material/21 = null
+material/22 = null
+material/23 = null
+material/24 = null
+material/25 = null
+material/26 = null
+material/27 = null
+material/28 = null
+material/29 = null
+material/30 = null
+material/31 = null
+material/32 = null
+auto = true

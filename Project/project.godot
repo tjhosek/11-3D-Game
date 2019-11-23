@@ -19,6 +19,10 @@ config/name="3D Game Project"
 run/main_scene="res://Scenes/CSGRoom.tscn"
 config/icon="res://icon.png"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "decals" )
+
 [input]
 
 move_forward={
