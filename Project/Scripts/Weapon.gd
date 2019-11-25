@@ -36,6 +36,9 @@ var fire_trans = Tween.TRANS_CUBIC
 
 #Weapon Stats
 export var damage = 0
+export var spread = 0
+export var projectiles = 1
+export var melee = false
 
 func _ready():
 	#Setting timer for firespeed

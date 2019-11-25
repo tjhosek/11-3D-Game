@@ -19,8 +19,6 @@ var mouse_sensitivity = .002 #Radians per Pixel
 var velocity = Vector3()
 var jump = false
 
-var damage = 5
-
 func _ready():
 	update_weapon()
 
@@ -68,7 +66,7 @@ func shoot_ray():
 	if raycast.is_colliding() and shoot and current_weapon.fireTimer.is_stopped():
 		var hit = raycast.get_collider()
 		if hit.is_in_group("Enemies"):
-			hit.health -= damage
+			hit.health -= current_weapon.damage
 			get_parent().get_node("HUD/Label").text = "hit: "+str(raycast.get_collision_point())
 			print(str(raycast.get_collision_point()))
 		current_weapon.fireTimer.start()
@@ -81,14 +79,14 @@ func update_weapon(number = 0,addToIndex = false):
 		elif weaponIndex < 0:
 			weaponIndex = len(weapon_container)-1
 	else:
-		weaponIndex = number
+		if number < len(weapon_container) and number >= 0:
+			weaponIndex = number
 	
 	
 	for i in range(len(weapon_container)):
 		if i == weaponIndex:
 			current_weapon = weapon_container[i]
 			current_weapon.active = true
-			damage = current_weapon.damage
 			print(str(current_weapon.name))
 			connect("shootanims",current_weapon,"fireAnims")
 			connect("stopShootAnims",current_weapon,"fireAnimsStop")

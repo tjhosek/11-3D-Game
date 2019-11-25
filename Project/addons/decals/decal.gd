@@ -1,4 +1,4 @@
-ool
+tool
 extends MeshInstance
 
 const SHADER = preload("decal.shader")

@@ -34,6 +34,8 @@ current = true
 transform = Transform( -7.90278, -0.121658, -1.23746, -0.574358, 7.4185, 2.9387, 1.10282, 2.99183, -7.33708, 0.254, -0.208, -0.406 )
 fire_speed = 0.0
 active = true
+damage = 3
+spread = 5
 
 [node name="SMG" parent="Pivot/Weapons" instance=ExtResource( 2 )]
 transform = Transform( -7.74823, -1.9853, 0.153568, -1.99078, 7.71026, -0.767241, 0.0423941, -0.78131, -7.96164, 0, -0.5, 0 )
@@ -60,8 +62,11 @@ material/32 = null
 auto = true
 recovery_anim_speed = 0.07
 fire_speed = 0.0
+damage = 3
+spread = 10
 
 [node name="Shotgun" parent="Pivot/Weapons" instance=ExtResource( 2 )]
+transform = Transform( 8, 0, 0, 0, 8, 0, 0, 0, 8, 0, -0.5, 0 )
 mesh = ExtResource( 4 )
 material/14 = null
 material/15 = null
@@ -84,7 +89,8 @@ material/31 = null
 material/32 = null
 recovery_anim_speed = 0.8
 fire_speed = 0.0
-damage = 10
+damage = 2
+spread = 15
 
 [node name="RayCast" type="RayCast" parent="Pivot"]
 enabled = true
