@@ -30,12 +30,10 @@ current = true
 [node name="Weapons" type="Spatial" parent="Pivot"]
 
 [node name="Pistol" parent="Pivot/Weapons" instance=ExtResource( 2 )]
-transform = Transform( 8, 0, 0, 0, 8, 0, 0, 0, 8, 0, -0.5, 0 )
-base_rotation = Vector3( 6.229, -177.344, -4.282 )
-base_location = Vector3( 0.254, -0.208, -0.406 )
+transform = Transform( -7.90278, -0.121658, -1.23746, -0.574358, 7.4185, 2.9387, 1.10282, 2.99183, -7.33708, 0.254, -0.208, -0.406 )
 
 [node name="SMG" parent="Pivot/Weapons" instance=ExtResource( 2 )]
-transform = Transform( -7.28049, -3.29406, 0.379001, -3.31573, 7.22718, -0.879679, 0.0198257, -0.957644, -7.94245, 0.252762, -0.265, -0.427909 )
+transform = Transform( -7.74823, -1.9853, 0.153568, -1.99078, 7.71026, -0.767241, 0.0423941, -0.78131, -7.96164, 0, -0.5, 0 )
 mesh = ExtResource( 3 )
 material/14 = null
 material/15 = null
@@ -56,6 +54,8 @@ material/29 = null
 material/30 = null
 material/31 = null
 material/32 = null
+auto = true
+fire_speed = 0.0
 active = true
 
 [node name="RayCast" type="RayCast" parent="Pivot"]

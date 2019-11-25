@@ -7,6 +7,7 @@ onready var current_weapon = $Pivot/Weapons/Pistol
 
 var shoot = false
 signal shootanims
+signal stopShootAnims
 
 var gravity = 30
 var jump_speed = 12
@@ -16,11 +17,12 @@ var mouse_sensitivity = .002 #Radians per Pixel
 var velocity = Vector3()
 var jump = false
 
-var damage = 0
+var damage = 5
 
 func _ready():
 	update_weapon()
 	connect("shootanims",current_weapon,"fireAnims")
+	connect("stopShootAnims",current_weapon,"fireAnimsStop")
 
 func get_input():
 	jump = false
@@ -38,6 +40,9 @@ func get_input():
 	if Input.is_action_just_pressed("primary fire"):
 		shoot = true
 		emit_signal("shootanims")
+	if Input.is_action_just_released("primary fire"):
+		shoot = false
+		emit_signal("stopShootAnims")
 	input_dir = input_dir.normalized()
 	return input_dir
 	
@@ -48,17 +53,19 @@ func _unhandled_input(event):
 		$Pivot.rotation.x = clamp($Pivot.rotation.x, -1.2, 1.2)
 		
 func shoot_ray():
-	if raycast.is_colliding() and shoot:
+	if raycast.is_colliding() and shoot and current_weapon.fireTimer.is_stopped():
 		var hit = raycast.get_collider()
 		if hit.is_in_group("Enemies"):
 			hit.health -= damage
 			get_parent().get_node("HUD/Label").text = "hit: "+str(raycast.get_collision_point())
 			print(str(raycast.get_collision_point()))
+		current_weapon.fireTimer.start()
 		
 func update_weapon():
 	for i in weapon_container.get_children():
 		if i.active:
 			current_weapon = i
+			damage = i.damage
 			print(str(current_weapon.name))
 			connect("shootanims",current_weapon,"fireAnims")
 
@@ -77,5 +84,6 @@ func _physics_process(delta):
 		velocity.y = jump_speed
 	
 	shoot_ray()
-	shoot = false
+	if not current_weapon.auto:
+		shoot = false
 	

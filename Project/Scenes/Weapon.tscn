@@ -30,3 +30,7 @@ playback/repeat = true
 
 [node name="Fire" type="Tween" parent="."]
 playback_process_mode = 0
+
+[node name="Fire Speed Timer" type="Timer" parent="."]
+process_mode = 0
+one_shot = true

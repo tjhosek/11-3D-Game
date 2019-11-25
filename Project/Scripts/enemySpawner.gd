@@ -1,6 +1,6 @@
 extends CSGCombiner
 
-var enemy = preload("res://Scenes/TestDummy.tscn")
+export var enemy = preload("res://Scenes/TestDummy.tscn")
 onready var spawnCheck = $spawnCheck
 onready var spawnLoc = $spawnLocation
 var maxspawns = 1
