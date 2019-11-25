@@ -2,8 +2,10 @@ extends KinematicBody
 
 onready var camera = $Pivot/Camera
 onready var raycast = $Pivot/RayCast
-onready var weapon_container = $Pivot/Weapons
+onready var weapon_container = $Pivot/Weapons.get_children()
 onready var current_weapon = $Pivot/Weapons/Pistol
+
+var weaponIndex = 0
 
 var shoot = false
 signal shootanims
@@ -21,8 +23,6 @@ var damage = 5
 
 func _ready():
 	update_weapon()
-	connect("shootanims",current_weapon,"fireAnims")
-	connect("stopShootAnims",current_weapon,"fireAnimsStop")
 
 func get_input():
 	jump = false
@@ -40,9 +40,21 @@ func get_input():
 	if Input.is_action_just_pressed("primary fire"):
 		shoot = true
 		emit_signal("shootanims")
-	if Input.is_action_just_released("primary fire"):
+	if Input.is_action_just_released("primary fire") and current_weapon.auto:
 		shoot = false
 		emit_signal("stopShootAnims")
+	if Input.is_action_just_pressed("switch_weapons_up"):
+		update_weapon(1,true)
+	if Input.is_action_just_pressed("switch_weapons_down"):
+		update_weapon(-1,true)
+	if Input.is_action_just_pressed("weapon_1"):
+		update_weapon(0)
+	if Input.is_action_just_pressed("weapon_2"):
+		update_weapon(1)
+	if Input.is_action_just_pressed("weapon_3"):
+		update_weapon(2)
+	if Input.is_action_just_pressed("weapon_4"):
+		update_weapon(3)
 	input_dir = input_dir.normalized()
 	return input_dir
 	
@@ -61,13 +73,29 @@ func shoot_ray():
 			print(str(raycast.get_collision_point()))
 		current_weapon.fireTimer.start()
 		
-func update_weapon():
-	for i in weapon_container.get_children():
-		if i.active:
-			current_weapon = i
-			damage = i.damage
+func update_weapon(number = 0,addToIndex = false):
+	if addToIndex:
+		weaponIndex += number
+		if weaponIndex >= len(weapon_container):
+			weaponIndex = 0
+		elif weaponIndex < 0:
+			weaponIndex = len(weapon_container)-1
+	else:
+		weaponIndex = number
+	
+	
+	for i in range(len(weapon_container)):
+		if i == weaponIndex:
+			current_weapon = weapon_container[i]
+			current_weapon.active = true
+			damage = current_weapon.damage
 			print(str(current_weapon.name))
 			connect("shootanims",current_weapon,"fireAnims")
+			connect("stopShootAnims",current_weapon,"fireAnimsStop")
+			current_weapon.update()
+		else:
+			weapon_container[i].active = false
+			weapon_container[i].update()
 
 func _physics_process(delta):
 	#Applying Gravity

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/FPS Character.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Weapon.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/uzi.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://Assets/shotgun.obj" type="ArrayMesh" id=4]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
@@ -31,6 +32,8 @@ current = true
 
 [node name="Pistol" parent="Pivot/Weapons" instance=ExtResource( 2 )]
 transform = Transform( -7.90278, -0.121658, -1.23746, -0.574358, 7.4185, 2.9387, 1.10282, 2.99183, -7.33708, 0.254, -0.208, -0.406 )
+fire_speed = 0.0
+active = true
 
 [node name="SMG" parent="Pivot/Weapons" instance=ExtResource( 2 )]
 transform = Transform( -7.74823, -1.9853, 0.153568, -1.99078, 7.71026, -0.767241, 0.0423941, -0.78131, -7.96164, 0, -0.5, 0 )
@@ -55,8 +58,33 @@ material/30 = null
 material/31 = null
 material/32 = null
 auto = true
+recovery_anim_speed = 0.07
 fire_speed = 0.0
-active = true
+
+[node name="Shotgun" parent="Pivot/Weapons" instance=ExtResource( 2 )]
+mesh = ExtResource( 4 )
+material/14 = null
+material/15 = null
+material/16 = null
+material/17 = null
+material/18 = null
+material/19 = null
+material/20 = null
+material/21 = null
+material/22 = null
+material/23 = null
+material/24 = null
+material/25 = null
+material/26 = null
+material/27 = null
+material/28 = null
+material/29 = null
+material/30 = null
+material/31 = null
+material/32 = null
+recovery_anim_speed = 0.8
+fire_speed = 0.0
+damage = 10
 
 [node name="RayCast" type="RayCast" parent="Pivot"]
 enabled = true

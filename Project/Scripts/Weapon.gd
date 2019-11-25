@@ -86,3 +86,26 @@ func fireAnimsStop():
 	
 func _physics_process(delta):
 	pass
+	
+func update():
+	if active:
+		self.translation = base_location
+		self.rotation_degrees = base_rotation
+		
+		idleTween.interpolate_property(self,"translation",null,translation+idle_anim_offset,idle_translation_speed,Tween.TRANS_QUART,Tween.EASE_IN_OUT)
+		idleTween.interpolate_property(self,"translation",translation+idle_anim_offset,translation,idle_translation_speed,Tween.TRANS_QUART,Tween.EASE_IN_OUT,idle_translation_speed)
+		
+		for i in range(len(idle_locs)):
+			var prev = Vector3()
+			if i == 0:
+				prev = idle_locs[-1]
+			else:
+				prev = idle_locs[i-1]
+			idleTween.interpolate_property(self,"rotation_degrees",prev,idle_locs[i],idle_spd,Tween.TRANS_SINE,Tween.EASE_IN_OUT,i*idle_spd)
+		
+		idleTween.start()
+	else:
+		translation = Vector3(0,-.5,0)
+		rotation_degrees =Vector3(0,0,0)
+		idleTween.remove_all()
+		fireAnimsStop()
