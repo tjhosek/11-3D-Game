@@ -19,7 +19,10 @@ var mouse_sensitivity = .002 #Radians per Pixel
 var velocity = Vector3()
 var jump = false
 
+var spread_generator = RandomNumberGenerator.new()
+
 func _ready():
+	spread_generator.randomize()
 	update_weapon()
 
 func get_input():
@@ -62,13 +65,20 @@ func _unhandled_input(event):
 		$Pivot.rotate_x(-event.relative.y*mouse_sensitivity)
 		$Pivot.rotation.x = clamp($Pivot.rotation.x, -1.2, 1.2)
 		
-func shoot_ray():
-	if raycast.is_colliding() and shoot and current_weapon.fireTimer.is_stopped():
-		var hit = raycast.get_collider()
-		if hit.is_in_group("Enemies"):
-			hit.health -= current_weapon.damage
-			get_parent().get_node("HUD/Label").text = "hit: "+str(raycast.get_collision_point())
-			print(str(raycast.get_collision_point()))
+func shoot_ray(n):
+	if shoot and current_weapon.fireTimer.is_stopped():
+		for i in range(n):
+			spread_generator.randomize()
+			var deviation = Vector3(spread_generator.randf_range(-current_weapon.spread,current_weapon.spread),spread_generator.randf_range(-current_weapon.spread,current_weapon.spread),0)
+			print("deviation: "+str(deviation))
+			raycast.rotation_degrees = deviation
+			raycast.force_raycast_update()
+			if raycast.is_colliding():
+				var hit = raycast.get_collider()
+				if hit.is_in_group("Enemies"):
+					hit.health -= current_weapon.damage
+					#get_parent().get_node("HUD/Label").text = "hit: "+str(raycast.get_collision_point())
+					print("hit: "+str(raycast.get_collision_point()))
 		current_weapon.fireTimer.start()
 		
 func update_weapon(number = 0,addToIndex = false):
@@ -109,7 +119,7 @@ func _physics_process(delta):
 	if jump and is_on_floor():
 		velocity.y = jump_speed
 	
-	shoot_ray()
+	shoot_ray(current_weapon.projectiles)
 	if not current_weapon.auto:
 		shoot = false
 	

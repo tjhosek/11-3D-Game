@@ -63,7 +63,7 @@ auto = true
 recovery_anim_speed = 0.07
 fire_speed = 0.0
 damage = 3
-spread = 10
+spread = 5
 
 [node name="Shotgun" parent="Pivot/Weapons" instance=ExtResource( 2 )]
 transform = Transform( 8, 0, 0, 0, 8, 0, 0, 0, 8, 0, -0.5, 0 )
@@ -90,7 +90,8 @@ material/32 = null
 recovery_anim_speed = 0.8
 fire_speed = 0.0
 damage = 2
-spread = 15
+spread = 7
+projectiles = 8
 
 [node name="RayCast" type="RayCast" parent="Pivot"]
 enabled = true
