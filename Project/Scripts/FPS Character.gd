@@ -10,6 +10,7 @@ var weaponIndex = 0
 var shoot = false
 signal shootanims
 signal stopShootAnims
+signal smoke
 
 var gravity = 30
 var jump_speed = 12
@@ -22,6 +23,7 @@ var jump = false
 var spread_generator = RandomNumberGenerator.new()
 
 func _ready():
+	connect("smoke",get_parent(),"spawn_gunsmoke")
 	spread_generator.randomize()
 	update_weapon()
 
@@ -70,7 +72,7 @@ func shoot_ray(n):
 		for i in range(n):
 			spread_generator.randomize()
 			var deviation = Vector3(spread_generator.randf_range(-current_weapon.spread,current_weapon.spread),spread_generator.randf_range(-current_weapon.spread,current_weapon.spread),0)
-			print("deviation: "+str(deviation))
+			#print("deviation: "+str(deviation))
 			raycast.rotation_degrees = deviation
 			raycast.force_raycast_update()
 			if raycast.is_colliding():
@@ -78,7 +80,8 @@ func shoot_ray(n):
 				if hit.is_in_group("Enemies"):
 					hit.health -= current_weapon.damage
 					#get_parent().get_node("HUD/Label").text = "hit: "+str(raycast.get_collision_point())
-					print("hit: "+str(raycast.get_collision_point()))
+					#print("hit: "+str(raycast.get_collision_point()))
+				emit_signal("smoke",to_global(current_weapon.base_location)+current_weapon.get_node("BarrelPoint").translation,raycast.get_collision_point())
 		current_weapon.fireTimer.start()
 		
 func update_weapon(number = 0,addToIndex = false):

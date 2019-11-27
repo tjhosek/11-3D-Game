@@ -31,14 +31,17 @@ current = true
 [node name="Weapons" type="Spatial" parent="Pivot"]
 
 [node name="Pistol" parent="Pivot/Weapons" instance=ExtResource( 2 )]
-transform = Transform( -7.90278, -0.121658, -1.23746, -0.574358, 7.4185, 2.9387, 1.10282, 2.99183, -7.33708, 0.254, -0.208, -0.406 )
+transform = Transform( -7.99948, 0, -0.0909607, 0, 8, 0, 0.0909607, 0, -7.99948, 0.254, -0.208, -0.406 )
 fire_speed = 0.0
 active = true
 damage = 3
 spread = 5
 
+[node name="BarrelPoint" type="Spatial" parent="Pivot/Weapons/Pistol"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.999999, -0.00163243, 0.0137927, 0.0245349 )
+
 [node name="SMG" parent="Pivot/Weapons" instance=ExtResource( 2 )]
-transform = Transform( -7.74823, -1.9853, 0.153568, -1.99078, 7.71026, -0.767241, 0.0423941, -0.78131, -7.96164, 0, -0.5, 0 )
+transform = Transform( 8, 0, 0, 0, 8, 0, 0, 0, 8, 0, -0.5, 0 )
 mesh = ExtResource( 3 )
 material/14 = null
 material/15 = null
@@ -64,6 +67,9 @@ recovery_anim_speed = 0.07
 fire_speed = 0.0
 damage = 3
 spread = 5
+
+[node name="BarrelPoint" type="Spatial" parent="Pivot/Weapons/SMG"]
+transform = Transform( 1, -2.32831e-010, 2.93367e-008, 1.10362e-007, 1, 2.23517e-008, 3.95812e-008, -1.49012e-007, 1, 0.000803417, 0.0173724, 0.0204761 )
 
 [node name="Shotgun" parent="Pivot/Weapons" instance=ExtResource( 2 )]
 transform = Transform( 8, 0, 0, 0, 8, 0, 0, 0, 8, 0, -0.5, 0 )
@@ -92,6 +98,9 @@ fire_speed = 0.0
 damage = 2
 spread = 7
 projectiles = 8
+
+[node name="BarrelPoint" type="Spatial" parent="Pivot/Weapons/Shotgun"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000283483, 0.00677467, 0.0374093 )
 
 [node name="RayCast" type="RayCast" parent="Pivot"]
 enabled = true

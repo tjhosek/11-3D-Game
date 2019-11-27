@@ -1,14 +1,17 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/World.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Ledge.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Wall.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Wall.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Ledge.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/crosshair.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/enemySpawner.tscn" type="PackedScene" id=6]
 
+[sub_resource type="SpatialMaterial" id=2]
+
 [sub_resource type="SpatialMaterial" id=1]
-albedo_color = Color( 0.858824, 0.737255, 0.501961, 1 )
+flags_transparent = true
+albedo_color = Color( 1, 0.764706, 0.203922, 1 )
 
 [node name="CSGRoom" type="Spatial"]
 script = ExtResource( 1 )
@@ -20,19 +23,19 @@ invert_faces = true
 width = 20.0
 height = 5.0
 depth = 20.0
-material = SubResource( 1 )
+material = SubResource( 2 )
 
-[node name="Ledge" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.25185, -0.5, 5 )
-
-[node name="Wall" parent="." instance=ExtResource( 3 )]
+[node name="Wall" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.9783 )
 
-[node name="Wall2" parent="." instance=ExtResource( 3 )]
+[node name="Wall2" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.00045 )
 
-[node name="Wall3" parent="." instance=ExtResource( 3 )]
+[node name="Wall3" parent="." instance=ExtResource( 2 )]
 transform = Transform( -4.37114e-008, 0, -1, 0, 1, 0, 1, 0, -4.37114e-008, -5, 0, 0 )
+
+[node name="Ledge" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 5 )
 
 [node name="Lights" type="Spatial" parent="."]
 
@@ -72,3 +75,12 @@ transform = Transform( 1, 0, 0, 0, -1, 8.74228e-008, 0, -8.74228e-008, -1, 3.755
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 0.150384, -0.5, 0.852869, 0.0868241, 0.866025, 0.492404, -0.984808, 0, 0.173648, 10.8529, 5.4924, 0.173648 )
+
+[node name="ImmediateGeometry" type="ImmediateGeometry" parent="."]
+material_override = SubResource( 1 )
+cast_shadow = 0
+
+[node name="SmokeTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.1
+one_shot = true
