@@ -6,6 +6,7 @@ onready var weapon_container = $Pivot/Weapons.get_children()
 onready var current_weapon = $Pivot/Weapons/Pistol
 
 var weaponIndex = 0
+var kills = 0
 
 var shoot = false
 signal shootanims
@@ -66,6 +67,10 @@ func _unhandled_input(event):
 		rotate_y(-event.relative.x*mouse_sensitivity)
 		$Pivot.rotate_x(-event.relative.y*mouse_sensitivity)
 		$Pivot.rotation.x = clamp($Pivot.rotation.x, -1.2, 1.2)
+		
+func increase_kills():
+	kills += 1
+	get_parent().get_node("HUD/Label").text = "Kills: "+str(kills)
 		
 func shoot_ray(n):
 	if shoot and current_weapon.fireTimer.is_stopped():

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+albedo_color = Color( 1, 0.764706, 0.203922, 1 )
+
+[node name="ImmediateGeometry" type="ImmediateGeometry"]
+material_override = SubResource( 1 )
+cast_shadow = 0

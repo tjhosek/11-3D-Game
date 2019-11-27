@@ -8,8 +8,10 @@ onready var flinchTween = $Flinch
 
 export var flinch = false
 
+signal dead
+
 func _ready():
-	pass
+	connect("dead",get_parent().get_parent().get_node("Player"),"increase_kills")
 
 func _physics_process(delta):
 	#Applying Gravity
@@ -20,6 +22,7 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector3.UP, true)
 	
 	if health <= 0:
+		emit_signal("dead")
 		queue_free()
 		
 func flinch(node,dam):

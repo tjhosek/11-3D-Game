@@ -16,11 +16,12 @@ func spawnEnemy():
 	var newspawn = enemy.instance(PackedScene.GEN_EDIT_STATE_MAIN)
 	newspawn.translation = spawnLoc.translation+Vector3(0,2,0)
 	newspawn.scale = Vector3(2.5,2.5,2.5)
-	newspawn.rotation_degrees = Vector3(0,180,180)
+	newspawn.rotation_degrees = rotation_degrees
 	add_child(newspawn)
 	
 func _physics_process(delta):
 	counter+=1
+
 	if not spawnCheck.is_colliding() and isSpawning:
 		spawnEnemy()
 		counter = 0
